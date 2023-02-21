@@ -1,18 +1,33 @@
+package com.student.entities;
 
-package com.entities;
 
-public class Mechanical extends Student{
+public class MechanicalStudent extends Student{
 	
-	private int fees = 80000;
 	private String Stream; 
+	private int fees;
+	private int paidFees; 
 	
-	public Mechanical(String name, int age, String email, int rollNo, String stream ) {
+	
+	public MechanicalStudent(String name, int age, String email, int rollNo, String stream ) {
 	super(name,age,email,rollNo);
 	this.Stream = stream;
-}
+	this.fees = 80000;
+	}
 	
-	int getFees() {
+	public int getFees() {
 		return fees;
+	}
+	
+	public int getPaidFees() {
+		return paidFees;
+	}
+	
+	public void setPaidFees(int money) {
+		paidFees = money;
+	}
+	
+	public int getRemainingFees() {
+		return fees - paidFees;
 	}
 	
 	public String getStream() {

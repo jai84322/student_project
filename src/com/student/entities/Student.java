@@ -1,7 +1,7 @@
+package com.student.entities;
 
-package com.entities;
 
-abstract public class Student  {
+ public class Student  {
 
 	private String name;
 	private int age;
@@ -15,7 +15,6 @@ abstract public class Student  {
 		this.rollNo = rollNo;
 	};
 
-	abstract int getFees();
 	
 	public void setName(String name) {
 		this.name = name;
