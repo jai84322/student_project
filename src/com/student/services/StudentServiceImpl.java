@@ -1,20 +1,19 @@
 package com.student.services;
 
 import com.student.dao.StudentDao;
-import com.student.helpers.CommonHelper;
+
 
 
 
 public class StudentServiceImpl implements StudentService {
 
-	private static final StudentDao obj = new StudentDao();
+	public static final StudentDao obj = new StudentDao();
 	
 	@Override
 	public String add(String name, int age, String email, int rollNo, String stream ) {
 		
 		String str = obj.saveStudent(name, age, email, rollNo, stream);
-		return str;
-		
+		return str;	
 	}
 
 	@Override

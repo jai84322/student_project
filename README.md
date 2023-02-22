@@ -58,22 +58,26 @@ C) There is Third model which is for College.
 
 ## Folder tree structure
 
-Some text
 
 ```text
-folder1/
-└── folder2/
-    ├── folder3/
-    │   ├── file1
-    │   └── file2
-    └── folder4/
-        ├── file3
-        └── file4
+       
+ projectStudent/
+    ├─ src/		 
+    	├── main/
+    	│  	├── controllers 
+    	│	├── dao	
+    	│	├── entities
+    	│	├── helpers
+    	│	└── services
+    	└── test/
+        	├── StudentServiceImplTest.java
+        	 
+        	
 ```
 
 
 ## Approach
-- Approach for students section: CRUD, searching, sorting, fees 
+A) Approach for students section: CRUD, searching, sorting, fees 
 1) controllers 2) services  3) dao  4) entities
 
 
@@ -103,13 +107,19 @@ e) payFees:
 - Students can pay their fees 
 
 
+B) Approach for College section: paying salary to teachers, sorting of students
+
+1) salary to teachers: Here we have a main account of college which is connected to students. So whenever any student pay their fees this main account will be credited. From this same main account we will be paying to teachers. So I have created data members to hold the values and have written the logic for the same idea.
+
+2) Sorting of students: we have implemented custom sorting using comparator interface. A new comparator object is passed as argument while sorting. 
+
 
 ## Features provided
 - Student CRUD: Here I created student entity and inherited specific stream entities like civil, electrical which is then used to create specific stream students. Post that comes service layer where a student interface is created and all the methods without bodies are written. Implementation is written in another file. For storing data we have used map data structure where keys are something unique for ex student rollNo or teacher id and their objects is stored as values.  
 
 - Student sorting: Here I have sorted objects that are stored as values in hashmap using comparator.
 
-- Students can pay their fees and get their remaining fees also
+- Students can pay their fees and can see their remaining fees also
 
 - College can pay salaries to their teachers
 

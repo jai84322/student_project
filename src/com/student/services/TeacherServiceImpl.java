@@ -1,7 +1,7 @@
 package com.student.services;
 
 import com.student.dao.TeacherDao;
-import com.student.entities.Teacher;
+
 
 public class TeacherServiceImpl implements TeacherService {
 	

@@ -45,9 +45,5 @@ public class Teacher {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-	
-	
 		
 }

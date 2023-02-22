@@ -21,6 +21,9 @@ public class CollegeDao {
 		
 		if (stream.equals("civil")) {
 			CivilTeacher ct  = (CivilTeacher) ts.get(id);
+			if (ct == null) {
+				return "no such teacher id exists";
+			}
 			int salary = ct.getSalary();
 			int remainingTotalMoney = cg.getTotalMoneyEarned() - salary;
 			map.put(id , salary);

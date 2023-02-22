@@ -13,10 +13,14 @@ public class College {
 //	}
 	
 	public int getTotalMoneyEarned() {
+		System.out.println("total money earned: " + totalMoneyEarned);
 		return totalMoneyEarned;
+		
 	}
-	public void setTotalMoneyEarned(int totalMoneyEarned) {
-		this.totalMoneyEarned += totalMoneyEarned;
+	public void setTotalMoneyEarned(int MoneyEarned) {
+		totalMoneyEarned += MoneyEarned;
+		System.out.println("money earned: " + MoneyEarned); // working
+		System.out.println("total money in account: " + totalMoneyEarned);
 	}
 	
 	public void setRemainingMoney(int remainingMoney) {
@@ -26,8 +30,10 @@ public class College {
 	public int getTotalMoneySpent() {
 		return totalMoneySpent;
 	}
-	public void setTotalMoneySpent(int totalMoneySpent) {
-		this.totalMoneySpent += totalMoneySpent;
+	public void setTotalMoneySpent(int MoneySpent) {
+		totalMoneySpent += MoneySpent;
+		System.out.println("money spent: " + MoneySpent); // working
+		System.out.println("total money spent: " + totalMoneySpent);
 	}
 	
 }

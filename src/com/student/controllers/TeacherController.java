@@ -1,76 +1,74 @@
 package com.student.controllers;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import com.student.helpers.CommonHelper;
 import com.student.services.*;
 
 public class TeacherController {
 		public static void main(String[] args) {
 			
+			int choice;
+			TeacherService tsr = new TeacherServiceImpl();
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			
 			try {
-	    	int choice;
-	    	TeacherService stsr = new TeacherServiceImpl();
-	    	
 	    	do {
-	    		Scanner sc1 = new Scanner(System.in); 
 	    		System.out.println("1.Add new Teacher");
 	    		System.out.println("2.search Teacher data");
-//	    		System.out.println("3.update student");
+//	    		System.out.println("3.update Teacher");
 	    		System.out.println("4.delete Teacher");
-	    		System.out.println("5.pay Teacher salary");
 	    		System.out.println("0.exit the system");
 	    		System.out.print("enter your choice: ");
-	    		choice = sc1.nextInt(); 
-	    		sc1.nextLine();	
-	    		
-	    		if ( choice >  4) {
+	    		choice = Integer.parseInt(br.readLine());
+	    		if ( choice >  4 || choice < 0) {
 	    			throw new Exception("please enter number between 0 to 4");
 	    		}   
-	    		
 	    		
 	    		switch (choice) {
 				case 1: 
 					System.out.print("enter name of teacher: ");
-					String name = sc1.nextLine();
+					String name = br.readLine();
 					if (CommonHelper.checkValidString(name)) {
-						throw new NullPointerException("please provide valid name input");
+						throw new Exception("please provide valid name input");
 					};
-				
-					
 					
 					System.out.print("enter teacher stream: ");
-					String stream = sc1.nextLine();
+					String stream = br.readLine();
 					if (CommonHelper.checkValidString(stream)) {
-						throw new NullPointerException("please provide valid stream input");
+						throw new Exception("please provide valid stream input");
 					}
 					
 					System.out.print("enter teacher age: ");
-					int age = sc1.nextInt();
-					sc1.nextLine();
+					int age = Integer.parseInt(br.readLine());
+					
 					System.out.print("enter teacher email: ");
-					String email = sc1.nextLine();
+					String email = br.readLine();
 					if (CommonHelper.checkValidString(email)) {
-						throw new NullPointerException("please provide valid email input");
+						throw new Exception("please provide valid email input");
 					}
 					
 					System.out.print("enter Teacher id: ");
-					int id = sc1.nextInt();
+					int id = Integer.parseInt(br.readLine());
 					
-					
-					String str = stsr.add(name, age, email, id, stream);
+					String str = tsr.add(name, age, email, id, stream);
 					System.out.println("---------------------------------");
 					System.out.println(str);	
 					System.out.println("---------------------------------");
 					break;
 				case 2:
 					System.out.print("enter teacher id: ");
-					id = sc1.nextInt();
-					Object o = stsr.get(id);
+					id = Integer.parseInt(br.readLine());
+					
+					Object o = tsr.get(id);
 					System.out.println("----------------------------------");
-					System.out.println(o);
+					if (o == null) {
+						System.out.println("no such teacher exists with this id");
+					} else {
+						System.out.println(o);
+					}
 					System.out.println("----------------------------------");
 					break;
 					
@@ -125,10 +123,10 @@ public class TeacherController {
 //					while (choiceTwo != 0 );
 				
 				case 4:
-					System.out.print("enter your rollNo: ");
-					id = sc1.nextInt();
+					System.out.print("enter teacher id: ");
+					id = Integer.parseInt(br.readLine());
 					
-					str = stsr.delete(id);
+					str = tsr.delete(id);
 					System.out.println("-----------------------");
 					System.out.println(str);	
 					System.out.println("-----------------------");
@@ -136,15 +134,23 @@ public class TeacherController {
 	    		}
 	    	}
 	    	while(choice != 0);
-
+	    	System.out.println("system exiting");
+	        
+			 } catch(NumberFormatException num) {
+				 System.out.println(num+" || error: please enter number only in the input");
 			 } catch (InputMismatchException ix) {
 				System.out.println(ix + " error: please enter number only" );
-			}  catch (NullPointerException nx) {
+			} catch (NullPointerException nx) {
 				System.out.println(nx+ " null is not allowed here");
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 	 			System.out.println(e);
+			} finally {
+	    		try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+			}
 
 			
 			

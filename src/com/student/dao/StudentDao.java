@@ -1,5 +1,7 @@
 package com.student.dao;
 
+import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,9 @@ import com.student.entities.College;
 import com.student.entities.ElectricalStudent;
 import com.student.entities.MechanicalStudent;
 import com.student.entities.Student;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class StudentDao {
 
@@ -87,4 +92,48 @@ public class StudentDao {
 		}		
 		return "";
 	}
+	
+	public String sortAllStudentUsingName() {
+
+    	Set<Map.Entry<Integer, Student>> entrySet = map.entrySet();
+    	List<Map.Entry<Integer, Student>> list = new ArrayList<>(entrySet);
+    	Collections.sort(list, (o1, o2) -> o1.getValue().getName().compareTo(o2.getValue().getName()));
+    	
+    	list.forEach(e->{
+    		System.out.println(e.getKey() + "\t" + e.getValue());
+    	});
+    	
+    	return "";
+	}
+	
+	public String sortAllStudentUsingRollNo() {
+
+    	Set<Map.Entry<Integer, Student>> entrySet = map.entrySet();
+    	List<Map.Entry<Integer, Student>> list = new ArrayList<>(entrySet);
+    	Collections.sort(list, (o1, o2) -> o1.getValue().getRollNo() - o2.getValue().getRollNo());
+    	
+    	list.forEach(e->{
+    		System.out.println(e.getKey() + "\t" + e.getValue());
+    	});
+    	
+    	return "";
+		
+	}
+	
+	public String sortAllStudentUsingAge() {
+
+    	Set<Map.Entry<Integer, Student>> entrySet = map.entrySet();
+    	List<Map.Entry<Integer, Student>> list = new ArrayList<>(entrySet);
+    	Collections.sort(list, (o1, o2) -> o1.getValue().getAge() - o2.getValue().getAge());
+    	
+    	list.forEach(e->{
+    		System.out.println(e.getKey() + "\t" + e.getValue());
+    	});
+    	
+    	return "";
+		
+	}
+	
+
+		
 }

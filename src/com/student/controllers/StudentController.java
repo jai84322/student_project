@@ -1,63 +1,71 @@
 package com.student.controllers;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.stream.Stream;
-
 import com.student.helpers.*;
-
+import com.student.services.CollegeService;
+import com.student.services.CollegeServiceImpl;
 import com.student.services.StudentService;
 import com.student.services.StudentServiceImpl;
+import com.student.services.TeacherService;
+import com.student.services.TeacherServiceImpl;
 
 
 public class StudentController {
 
 	public static void main(String[] args) {
 		
-		try {
-    	int choice;
-    	StudentService stsr = new StudentServiceImpl();
-    	
+		int choice;
+		StudentService stsr = new StudentServiceImpl();
+		CollegeService cgs = new CollegeServiceImpl();
+		TeacherService tsr = new TeacherServiceImpl();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		try {    	
     	do {
-    		Scanner sc1 = new Scanner(System.in); 
     		System.out.println("1.Add new student");
     		System.out.println("2.search student data");
     		System.out.println("3.update student");
     		System.out.println("4.delete student");
     		System.out.println("5.pay student fees");
+//    		System.out.println("6.Add new Teacher");
+//    		System.out.println("7.pay teacher salary");
+//    		System.out.println("8.get sorted students by Names");
+//    		System.out.println("9.get sorted students by Age");
+//    		System.out.println("10.get sorted students by Roll No");
     		System.out.println("0.exit the system");
     		System.out.print("enter your choice: ");
-    		choice = sc1.nextInt(); 
-    		sc1.nextLine();	
-    		if ( choice >  5 || choice < 0) {
+    		choice = Integer.parseInt(br.readLine()); 
+    		if ( choice >  11 || choice < 0) {
     			throw new Exception("please enter number between 0 to 4");
     		}   
     		
     		switch (choice) {
 			case 1: 
 				System.out.print("enter name of student: ");
-				String name = sc1.nextLine();
+				String name = br.readLine();
 				if (CommonHelper.checkValidString(name)) {
-					throw new NullPointerException("please provide valid name input");
+					throw new Exception("please provide valid name input");
 				};
 				
 				System.out.print("enter student stream: ");
-				String stream = sc1.nextLine();
-				
+				String stream = br.readLine();
 				if (CommonHelper.checkValidString(stream)) {
-					throw new NullPointerException("please provide valid input");
+					throw new Exception("please provide valid stream input");
 				}
 				
 				System.out.print("enter age: ");
-				int age = sc1.nextInt();
-				sc1.nextLine();
+				int age = Integer.parseInt(br.readLine());
+				
 				System.out.print("enter student email: ");
-				String email = sc1.nextLine();
+				String email = br.readLine();
 				if (CommonHelper.checkValidString(email)) {
-					throw new NullPointerException("please provide valid email input");
+					throw new Exception("please provide valid email input");
 				}
 				
 				System.out.print("enter student roll no: ");
-				int rollno = sc1.nextInt();
+				int rollno = Integer.parseInt(br.readLine()); 
 				
 				
 				String str = stsr.add(name, age, email, rollno, stream);
@@ -67,31 +75,41 @@ public class StudentController {
 				break;
 			case 2:
 				System.out.print("enter your rollNo: ");
-				rollno = sc1.nextInt();
+				rollno = Integer.parseInt(br.readLine());
 				Object o = stsr.get(rollno);
 				System.out.println("----------------------------------");
-				System.out.println(o);
+				if (o == null) {
+					System.out.println("no such roll number found");
+				} else {
+					System.out.println(o);
+				}
 				System.out.println("----------------------------------");
 				break;
 				
 			case 3:
 				int choiceTwo;
 				System.out.print("enter your rollno: ");
-				rollno = sc1.nextInt();
+				rollno = Integer.parseInt(br.readLine());
 				do {
 					System.out.println("1.name");
 					System.out.println("2.age");
 					System.out.println("3.email");
 					System.out.println("0.back to previous menu");
 					System.out.print("enter your choice: ");
-					choiceTwo = sc1.nextInt();
+					choiceTwo = Integer.parseInt(br.readLine());
+					if (choiceTwo >3 || choiceTwo <0) {
+						throw new Exception("please enter number between 0 to 3");
+					}
 					
 					switch (choiceTwo) {
 					case 1: 
-						System.out.println("enter your rollNo");
-						rollno = sc1.nextInt();
+						System.out.print("enter your rollNo: ");
+						rollno = Integer.parseInt(br.readLine());
 						System.out.print("enter new name: ");
-						name = sc1.nextLine();
+						name = br.readLine();
+						if (CommonHelper.checkValidString(name)) {
+							throw new Exception("please provide valid name input");
+						};
 						
 						String updatedName = stsr.updateName(rollno, name);
 						System.out.println("---------------------------------");
@@ -99,10 +117,10 @@ public class StudentController {
 						System.out.println("---------------------------------");
 						break;
 					case 2:
-						System.out.println("enter your rollNo");
-						rollno = sc1.nextInt();
+						System.out.print("enter your rollNo: ");
+						rollno = Integer.parseInt(br.readLine());
 						System.out.print("enter new age: ");
-						age = sc1.nextInt();
+						age = Integer.parseInt(br.readLine());
 						
 						int updatedAge = stsr.updateAge(rollno, age);
 						System.out.println("---------------------------------");
@@ -110,10 +128,13 @@ public class StudentController {
 						System.out.println("---------------------------------");
 						break;
 					case 3:
-						System.out.println("enter your rollNo");
-						rollno = sc1.nextInt();
+						System.out.print("enter your rollNo: ");
+						rollno = Integer.parseInt(br.readLine());
 						System.out.print("enter the email: ");
-						email = sc1.nextLine();
+						email = br.readLine();
+						if (CommonHelper.checkValidString(email)) {
+							throw new Exception("please provide valid name input");
+						};
 						
 						String updatedEmail = stsr.updateEmail(rollno, email);
 						System.out.println("-----------------------");
@@ -123,10 +144,11 @@ public class StudentController {
 					}
 				} 
 				while (choiceTwo != 0 );
+				System.out.println("-------------------------------------");
 			
 			case 4:
 				System.out.print("enter your rollNo: ");
-				rollno = sc1.nextInt();
+				rollno = Integer.parseInt(br.readLine());
 				
 				str = stsr.delete(rollno);
 				System.out.println("-----------------------");
@@ -135,31 +157,99 @@ public class StudentController {
 				
 			case 5:
 				System.out.print("enter your rollNo: ");
-				rollno = sc1.nextInt();
-				sc1.nextLine();
+				rollno = Integer.parseInt(br.readLine());
 				System.out.print("enter your stream: ");
-				stream = sc1.nextLine();
+				stream = br.readLine();
 				System.out.print("enter money you are paying: ");
-				int money = sc1.nextInt();
-				sc1.close();
+				int money = Integer.parseInt(br.readLine());
 				
 				str = stsr.payFees(rollno, stream, money);
 				System.out.println("------------------------------");
 				System.out.println(str);
 				System.out.println("------------------------------");
 				break;
+				
+//			case 6:
+//				System.out.print("enter name of teacher: ");
+//				name = br.readLine();
+//				if (CommonHelper.checkValidString(name)) {
+//					throw new Exception("please provide valid name input");
+//				};
+//				
+//				System.out.print("enter teacher stream: ");
+//				stream = br.readLine();
+//				if (CommonHelper.checkValidString(stream)) {
+//					throw new Exception("please provide valid stream input");
+//				}
+//				
+//				System.out.print("enter teacher age: ");
+//				age = Integer.parseInt(br.readLine());
+//				
+//				System.out.print("enter teacher email: ");
+//				email = br.readLine();
+//				if (CommonHelper.checkValidString(email)) {
+//					throw new Exception("please provide valid email input");
+//				}
+//				
+//				System.out.print("enter Teacher id: ");
+//				int id = Integer.parseInt(br.readLine());
+//				
+//				str = tsr.add(name, age, email, id, stream);
+//				System.out.println("---------------------------------");
+//				System.out.println(str);	
+//				System.out.println("---------------------------------");
+//				break;
+//				
+//			case 7:
+//				System.out.print("enter teacher id: ");
+//				id = Integer.parseInt(br.readLine());
+//				
+//				System.out.print("enter teacher stream: ");
+//				stream = br.readLine();
+//				
+//				str = cgs.paySalary(id, stream); // what if I enter wrong id here ?
+//				System.out.println("----------------------------------");
+//				System.out.println(str);
+//				System.out.println("----------------------------------");
+//				break;
+//			case 8:
+//				str = cgs.sortStudentUsingName();
+//				System.out.println(str);
+//				break;
+//				
+//			case 9: 
+//				str = cgs.sortStudentUsingAge();
+//				System.out.println(str);
+//				break;
+//				
+//			case 10:
+//				str = cgs.sortStudentUsingRollNo();
+//				System.out.println(str);
+//				break;
+
     		}
     	}
     	while(choice != 0);
-
+    	System.out.println("system exiting");
+    
+		 } catch(NumberFormatException num) {
+			 System.out.println(num+" || error: please enter number only in the input");
 		 } catch (InputMismatchException ix) {
 			System.out.println(ix + " error: please enter number only" );
-		}  catch (NullPointerException nx) {
+		} catch (NullPointerException nx) {
 			System.out.println(nx+ " null is not allowed here");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
  			System.out.println(e);
+		} finally {
+    		try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+		}
+
 		
 	}
 }
+
+	
