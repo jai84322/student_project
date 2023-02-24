@@ -29,11 +29,11 @@ public class StudentController {
     		System.out.println("3.update student");
     		System.out.println("4.delete student");
     		System.out.println("5.pay student fees");
-//    		System.out.println("6.Add new Teacher");
-//    		System.out.println("7.pay teacher salary");
-//    		System.out.println("8.get sorted students by Names");
-//    		System.out.println("9.get sorted students by Age");
-//    		System.out.println("10.get sorted students by Roll No");
+    		System.out.println("6.Add new Teacher");
+    		System.out.println("7.pay teacher salary");
+    		System.out.println("8.get sorted students by Names");
+    		System.out.println("9.get sorted students by Age");
+    		System.out.println("10.get sorted students by Roll No");
     		System.out.println("0.exit the system");
     		System.out.print("enter your choice: ");
     		choice = Integer.parseInt(br.readLine()); 
@@ -169,63 +169,63 @@ public class StudentController {
 				System.out.println("------------------------------");
 				break;
 				
-//			case 6:
-//				System.out.print("enter name of teacher: ");
-//				name = br.readLine();
-//				if (CommonHelper.checkValidString(name)) {
-//					throw new Exception("please provide valid name input");
-//				};
-//				
-//				System.out.print("enter teacher stream: ");
-//				stream = br.readLine();
-//				if (CommonHelper.checkValidString(stream)) {
-//					throw new Exception("please provide valid stream input");
-//				}
-//				
-//				System.out.print("enter teacher age: ");
-//				age = Integer.parseInt(br.readLine());
-//				
-//				System.out.print("enter teacher email: ");
-//				email = br.readLine();
-//				if (CommonHelper.checkValidString(email)) {
-//					throw new Exception("please provide valid email input");
-//				}
-//				
-//				System.out.print("enter Teacher id: ");
-//				int id = Integer.parseInt(br.readLine());
-//				
-//				str = tsr.add(name, age, email, id, stream);
-//				System.out.println("---------------------------------");
-//				System.out.println(str);	
-//				System.out.println("---------------------------------");
-//				break;
-//				
-//			case 7:
-//				System.out.print("enter teacher id: ");
-//				id = Integer.parseInt(br.readLine());
-//				
-//				System.out.print("enter teacher stream: ");
-//				stream = br.readLine();
-//				
-//				str = cgs.paySalary(id, stream); // what if I enter wrong id here ?
-//				System.out.println("----------------------------------");
-//				System.out.println(str);
-//				System.out.println("----------------------------------");
-//				break;
-//			case 8:
-//				str = cgs.sortStudentUsingName();
-//				System.out.println(str);
-//				break;
-//				
-//			case 9: 
-//				str = cgs.sortStudentUsingAge();
-//				System.out.println(str);
-//				break;
-//				
-//			case 10:
-//				str = cgs.sortStudentUsingRollNo();
-//				System.out.println(str);
-//				break;
+			case 6:
+				System.out.print("enter name of teacher: ");
+				name = br.readLine();
+				if (CommonHelper.checkValidString(name)) {
+					throw new Exception("please provide valid name input");
+				};
+				
+				System.out.print("enter teacher stream: ");
+				stream = br.readLine();
+				if (CommonHelper.checkValidString(stream)) {
+					throw new Exception("please provide valid stream input");
+				}
+				
+				System.out.print("enter teacher age: ");
+				age = Integer.parseInt(br.readLine());
+				
+				System.out.print("enter teacher email: ");
+				email = br.readLine();
+				if (CommonHelper.checkValidString(email)) {
+					throw new Exception("please provide valid email input");
+				}
+				
+				System.out.print("enter Teacher id: ");
+				int id = Integer.parseInt(br.readLine());
+				
+				str = tsr.add(name, age, email, id, stream);
+				System.out.println("---------------------------------");
+				System.out.println(str);	
+				System.out.println("---------------------------------");
+				break;
+				
+			case 7:
+				System.out.print("enter teacher id: ");
+				id = Integer.parseInt(br.readLine());
+				
+				System.out.print("enter teacher stream: ");
+				stream = br.readLine();
+				
+				str = cgs.paySalary(id, stream); // what if I enter wrong id here ?
+				System.out.println("----------------------------------");
+				System.out.println(str);
+				System.out.println("----------------------------------");
+				break;
+			case 8:
+				str = cgs.sortStudentUsingName();
+				System.out.println(str);
+				break;
+				
+			case 9: 
+				str = cgs.sortStudentUsingAge();
+				System.out.println(str);
+				break;
+				
+			case 10:
+				str = cgs.sortStudentUsingRollNo();
+				System.out.println(str);
+				break;
 
     		}
     	}
